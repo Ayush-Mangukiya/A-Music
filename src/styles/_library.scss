@@ -2,11 +2,18 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 30rem;
+    width: 20rem;
     height: 100%;
+    background: white;
     background-color: rgb(255, 255, 255);
     box-shadow: 2px 2px 50px rgb(204, 204, 204);
+    transform: translateX(-100%);
+    transition: all 0.5s ease;
+    opacity: 0;
     overflow: scroll;
+    h2 {
+        padding: 2rem;
+    }
 }
 
 .library-song {
@@ -14,6 +21,8 @@
     align-items: center;
     padding: 1rem 2rem 1rem 2rem ;
     cursor: pointer;
+    transition: all 0.75s ease-out;
+
     img {
         width: 45%;
     }
@@ -40,4 +49,29 @@
     background-color: rgba(155, 155, 155, 0.5);
     border-radius: 20px;
     border: transparent;
+}
+
+.active-library{
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+.song-description {
+    padding-left: 1rem;
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.7rem;
+    }
+  }
+
+.selected {
+    background: rgb(194, 208, 253);
+}
+
+@media screen and (max-width: 768px) {
+    .library {
+      width: 100%;
+    }
 }
