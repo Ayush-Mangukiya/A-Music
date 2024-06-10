@@ -1,4 +1,4 @@
- const PlayAudio = (isPlaying, audioRef) => {
+export const PlayAudio = (isPlaying, audioRef) => {
     if(isPlaying) {
         const playPromise = audioRef.current.play();
         if(playPromise !== undefined) {
@@ -9,5 +9,3 @@
         }
     }
 }
-
-export default PlayAudio
