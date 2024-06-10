@@ -1,4 +1,5 @@
 import React from "react";
+import { PlayAudio } from "../util";
 
 function LibrarySong({name,
     artist,
@@ -33,12 +34,12 @@ function LibrarySong({name,
       }
     });
     setSongs(newSongs);
-    if(isPlaying) audioRef.current.play();
+    PlayAudio(isPlaying, audioRef);
 
   }
 
   return (
-    <div onClick={songSelectHandler} className="library-song">
+    <div onClick={songSelectHandler} className={`library-song ${active ? "selected" : ""}`}>
         <img src={cover} alt={name}></img>
         <div className="song-description">
             <h3>{name}</h3>

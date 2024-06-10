@@ -10,11 +10,12 @@ import Library from './components/Library';
 import Nav from './components/Nav';
 
 // Import utils
-import data from './data';
+import chillhop from './data';
+import { PlayAudio } from './util';
 
 function App() {
 
-  const [songs, setSongs] = useState(data);
+  const [songs, setSongs] = useState(chillhop());
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -37,19 +38,20 @@ function App() {
     const roundedDuration = Math.round(duration);
     const animation = Math.round((roundedCurrent / roundedDuration) * 100);
 
-    setSongInfo({...songInfo, currentTime: current, duration, animationPercentage: animation});
+    setSongInfo({...songInfo, currentTime: current, duration, animationPercentage: animation, volume: e.target.volume});
   }
 
-  const songEndHandler =  () => {
+  const songEndHandler = async () => {
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
-    setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    if(isPlaying) audioRef.current.play();
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+    PlayAudio(isPlaying, audioRef);
+    return;
   }
 
   return (
     <div className={`App ${libraryState ? 'library-active' : ''}`}>
       <Nav libraryState={libraryState} setLibraryState={setLibraryState} />
-      <Song currentSong={currentSong}  />
+      <Song isPlaying={isPlaying} currentSong={currentSong}  />
       <Player 
         currentSong={currentSong} 
         isPlaying={isPlaying} 
@@ -67,7 +69,6 @@ function App() {
         setCurrentSong = {setCurrentSong}
         isPlaying = {isPlaying}
         libraryState = {libraryState}
-        currentSong = {currentSong} 
         setSongs = { setSongs }
         />
 

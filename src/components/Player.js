@@ -61,7 +61,7 @@ function Player({currentSong, isPlaying, setIsPlaying, audioRef, setSongInfo, so
         return;
       }
       await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
-      activeLibraryHandler(songs[songs.length - 1]);
+      activeLibraryHandler(songs[(currentIndex - 1) % songs.length]);
     }
     if(isPlaying) audioRef.current.play();
   }
